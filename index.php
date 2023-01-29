@@ -19,14 +19,14 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="bg-light">
     <!-- Error Message Start -->
     <h4 id="error"></h4>
     <!-- Error Message End -->
 
 
     <div class="section_wrapper">
-        <div class="container">
+        <div class="container section">
             <div class="row">
                 <div class="col-mad-12">
                     <div class="file_uploading_area">
@@ -39,7 +39,6 @@
             </div>
         </div>
     </div>
-
 
 
 
@@ -60,8 +59,19 @@
 
                 // Checking if image is selected or not
                 if (img.length > 0) {
+                    form_data.append('theimg', img[0]);
 
-                }else{
+                    $.ajax({
+                        url: 'upload.php',
+                        type: 'post',
+                        data: form_data,
+                        contentTypes: false,
+                        processData: false,
+                        success: function (res) {
+                            console.log(res);
+                        }
+                    });
+                } else {
                     $("#error").text("Please pick an image to display");
                 }
             });
